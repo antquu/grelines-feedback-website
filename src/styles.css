@@ -1,0 +1,14 @@
+@import '../index.css';
+
+:root {
+  color: #e5eefb;
+  background: linear-gradient(135deg, #020617 0%, #111827 45%, #1f2937 100%);
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+* { box-sizing: border-box; }
