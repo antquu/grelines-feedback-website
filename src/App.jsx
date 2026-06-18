@@ -328,7 +328,7 @@ export default function App() {
             </h2>
 
               <label className="flex cursor-pointer items-center gap-3 rounded-[28px] bg-zinc-900 px-5 py-5 transition hover:bg-zinc-800">
-                <PaperClipIcon className="h-5 w-5 text-blue-400" />
+                <PaperClipIcon className="h-5 w-5 text-blue-400"/>
 
                 <span className="text-blue-400 font-medium">
                   Ajouter une pièce jointe (png, jpg) — max 5
