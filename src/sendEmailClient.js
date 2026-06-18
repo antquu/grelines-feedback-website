@@ -1,19 +1,32 @@
+import emailjs from '@emailjs/browser';
+
 export async function sendEmailAPI(payload) {
-  // payload should include fields like:
-  // { to_email, title, zone, type, description, attachment_name, attachment_filename, created_at, from_name, from_email }
-  const API_BASE = import.meta.env.VITE_API_URL || '';
-  const url = `${API_BASE}/api/send-email`;
+  const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || 'Failed to send email');
+  if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+    throw new Error('EmailJS not configured (VITE_EMAILJS_* env vars missing)');
   }
 
-  return res.json();
+  const templateParams = {
+    to_email: payload.to_email || '',
+    subject: payload.subject || '',
+    title: payload.title || '',
+    zone: payload.zone || '',
+    type: payload.type || '',
+    description: payload.description || '',
+    contact_email: payload.contact_email || '',
+    attachment_name: payload.attachment_name || '',
+    attachment_url: payload.attachment_url || '',
+    created_at: payload.created_at || '',
+    from_name: payload.from_name || '',
+    from_email: payload.from_email || ''
+  };
+
+  const res = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+  if (!res || res.status !== 200) {
+    throw new Error('Failed to send email via EmailJS');
+  }
+  return res;
 }
