@@ -151,7 +151,8 @@ ${contactHtml}
           <dd>${created_at || new Date().toLocaleString()}</dd>
         </dl>
 
-        <div class="footer">Ce message a été envoyé automatiquement depuis le formulaire de feedback GreStudio.</div>
+        <div class="footer">Ce message a été envoyé automatiquement depuis le formulaire de <a href="https://grelines-feedback-website.vercel.app/" target="_blank" rel="noopener noreferrer">feedback GreStudio.</a></div>
+        <div class="footer">Merci de ne pas y répondre.</div>
       </div>
     </div>
   </body>
